@@ -1,1 +1,15 @@
+=> Exchange of data between threads.
+=>IPC Techniques :- 
+   -> Sockets
+   -> Message Queues
+   -> Pipes
+   -> Shared Memory
 
+=>Communication between threads is preferred through callbacks due to following reasons :- 
+    -> very fast
+    -> no actaul transfer of data
+    -> transfer of computation.
+    -> completely runs in user space.
+    -> no kernal resource need to explicitly created.
+
+=>
