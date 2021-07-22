@@ -1,1 +1,114 @@
+->Multiple threads of the same process share same virtual address sapce of a process.
+  ->Resource allocated to one thread is visible to rest of the others.
+  ->Heap memory, file descriptors, sockets, global variables.
+-> threads do not share stack memory, every thread has its own stack memory.
+
+
+Thread Scheduling :- 
+-> Kernal(OS) do not schedule process, it schedules threads.
+-> Thread is a schedulable entity process not.
+-> if a thread seg fault, entire process is terminated including all threads.
+-> A signal is delivered per process, not per thread.
+
+A Thread is called as lightweight process due to the following reasons :-
+ 1.when a thread is created, it almost uses the pre-existing resources of the main thread, hence OS doesn't have to work hard to create an islolated execution environment for the for a new thread.
+ -> Page tables are already setup.
+ -> Shared libraries are already loaded.
+ -> Sockets are already opened.
+
+when thread dies os doesn't have to cleanup every resource used by the thread as resources could be in use by the other threads of the same process.
+ ex:- Heap memory, openend files, sockets, IPCS.
+ 
+ 
+ Overlapping and non-overlapping work :- 
+
+ 1. If a thread T1 is doing work w1 and thread T2 is doing work W2, then threads T1 and T2 will be said doing overlapping work if both the threads are working on same data.
+   EX : W1- sorting the ARRAY A in ascending order.
+        W2- sorting the ARRAY A in descending order.
+
+ w1 and w2 are called overlapping work because T1 and T2 are operating on the same data ARRAY A.
+ 
+ 
+ => When multiphle threads(same or different process) shares the same CPU with overlapping work, we get concurrency.
+ => When multiphle threads(same or different process) shares the same CPU with non-overlapping work, we get concurrency.
+ => When multiphle threads(same or different process) shares the different CPU with non-overlapping work, we get Parallelism.
+ 
+ A thread when created, it can be created in 1 or 2 ways :- 
+ 1. Joinable thread
+ 2. detached thread
+
+1. joinable thread :- pthread_join() -> Parent thread blocks here, untill new thread comes back and join in.
+                                     -> resources of the joinalbe thread are released only when it joins the caller thread.
+                                     
+                                     
+  -> Resources of the joinable thread are not realeased untill it joins the parent thread.
+  -> A joinable thread can be converted into detached thread while running or vice-versa.
+  -> By default, threads runs on joinable mode.
+  -> joinable threads may return the result to the joinee thread.
+  
+ 
+2. Detached Thread :- -> All resouces of the thread are released by the kernal process manager immediately.
+                      -> Resouces of the detached thread are relased as soon as the thread terminates.
+                      -> A detached thread can be converted into detached thread while running or vice-versa.
+                      -> detached thread do not return any result to the jpining thread, they work and die without telling anybody.
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
 
