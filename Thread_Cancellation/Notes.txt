@@ -1,5 +1,9 @@
 =>Thread Cancellation :- 
     1. Asynchronous cancellation
     2. Deferred cancellation
-    
+=> Thread cancellation request queued by OS.
+=> Having received the CR, the OS is now looking for an opportunity to terminate thread.
+=> OS may or may not terminate the thread instantly(Asynchronous), not in programer's hand
+=> 
+ 
    
