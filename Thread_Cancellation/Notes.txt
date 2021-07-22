@@ -1,0 +1,5 @@
+=>Thread Cancellation :- 
+    1. Asynchronous cancellation
+    2. Deferred cancellation
+    
+   
