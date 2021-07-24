@@ -32,9 +32,48 @@ Analogy :-
      keys    = Mutexes
 
 => How mutexes work :- 
-
    -> grant access to 1 and only 1 thread at a time.
-   ->   pthread_mutex_t mutes;
+   ->  
+         pthread_mutex_t mutex;
+         foo()
+         {
+          pthread_mutex_lock(&mutex)
+          =======================
+          |                     |
+          |  cs                 |
+         ========================
+         pthread_mutex_unlock(&mutex)
+         
+      }
+ =>whichever thread lock the mutex, shall be able to enter into CS
+ =>if a thread tries to lock a already locked mutex, thread is blocked
+ =>multi threads may be blocked by the same mutex.
+ =>when threads exists from the CS, it must unlock the nutex.
+ =>which thread has to be given the mutex among waiting threads depends on the priority and thread scheduling etc
+ =>More blocking and unblocking,more overhead done, poorer shall be application performance.
+ =>Bigger the cs, larger the waitimg time for the lock to be free.
+ 
+ 
+ 
+ 
+ 
+ *************************** mUTEX locking rules ********************************
+1.  If T1 lockes a mutex, only T1 can unlock it.
+2. T1 can not unblock an already unblocked Mutex = leads to undefined behhaviour
+3. if a thread tries to double lock a thread it leads to self-deadlocked.
+4. Mutexes are unlocked in LIFO order
 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
