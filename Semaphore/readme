@@ -1,0 +1,74 @@
+=> Semaphore Places and upperbound on no of threads/users of a resource.
+
+Difference between semaphore and mutex :- 
+
+1. 1 execution unit at a time.
+  
+2. N execution unit at a time.
+
+3.if semaphore S is initialized with n = 1, semaphore = mutex.
+therefore mutex are called binary semaphore.
+
+4. N execution at a time
+
+
+SEmahpre APIS :- 
+ 
+header file : #include <semaphore.h>
+declaration  : sem_t sem;
+               sem_init(sem_t sem, int pshared,int permit counter);
+               sem_wait(sem_t *sem);   //block the calling thread, if semaphore is not available
+               sem_post(sem_t *Sem);  //signal the blocked thread on semaphore
+               sem_destroy(sem_t*sem ) // destroy the semaphore after use
+               
+               
+               
+  Working :- 
+              sem_init(&sem,n);
+              sem_wait(&sem);
+        -----------------------
+                 cs
+        -----------------------
+              sem_post(&sem)
+              
+              
+              
+   Sem_wait(sem_t *sem)
+    -> unconditinally decreases the permit count (PC) of the semaphore.
+    -> if PC < 0 after decrement, block the calling thread.
+
+ Sem_post(sem_t *Sem)
+   -> unconditinally decreases the permit count (PC) of the semaphore.
+   -> send signals to threads blocked on sem_wait if any
+   -> allow n threads to allow concurrently in C.S
+   -> semaphore can be unlocked by a different thread(sem_post), in case os binary semaphore also.
+   
+   not neccessary pc increases of thread t1 gooes to sem_post.
+  any thread can go
+   
+   
+              
+              
+              
+              
+              
+              
+              
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
