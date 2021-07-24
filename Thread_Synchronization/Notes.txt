@@ -1,0 +1,40 @@
+=> Thread synchronization is required in multi threaded applications where multi threads compete to perform conflicting operations on the shared resource.
+   like(read write operationa and write write operation)
+Shared Resources :
+  -> Heap Datastrcuture
+  -> Global Variables
+  -> File descriptors(opened Files. Sockets)
+  -> Receiving data from external sources via multiple inlets.
+
+Critical Sections :- 
+
+=> code excerpts accessing the common data are called critcal section
+=> Critical threads must be executed by the concurrent threads but only one at a time.
+  -> Unexpected behavious
+  -> segementation fault
+  -> Data corruption
+  -> any abnormal behavious
+
+EX :- 1. Two or more threads updating same database
+      2. Two or more thread wriitng to the same buffer
+
+
+***************************************************************************** MUTEXES ***********************************************************************************************************8
+
+
+=> Mutexes are thread synchronization tools which provides mutual exclusitivity while accesing a critical section my multiple concurrent threads.
+Analogy :- 
+=>Mutexes are like locker to the key.
+=>whoever do not have the keys, have to wait
+=>whoever accessing the locker have to handover the keys when done with accessing the locker.
+     locker  = CS 
+     whoever = Threads
+     keys    = Mutexes
+
+=> How mutexes work :- 
+
+   -> grant access to 1 and only 1 thread at a time.
+   ->   pthread_mutex_t mutes;
+
+
+
