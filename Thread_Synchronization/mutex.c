@@ -1,4 +1,5 @@
 int arr[] = {1,2,3,4,5};
+pthread_mutex_t arr_mutex;
 
 
 static void* thread_fn_callback_sum(void *arg){
@@ -7,11 +8,14 @@ static void* thread_fn_callback_sum(void *arg){
   do {
         int i = 0;
         int sum = 0;
+    pthread_mutex_lock(&arr_mutex);
       while(i < arr_size){
        sum = sum + arr[i]; 
         i++;
    }
-    printf("sum is : %d\n", sum);    
+    printf("sum is : %d\n", sum);  
+    print_array();
+   pthread_mutex_unlock(&arr_mutex);
   }while(1);
 }
 
@@ -20,12 +24,14 @@ static void* thread_fn_callback_swap(void *arg){
    int arr_size = sizeof(arr)/sizeof(arr[0]);
   do {
       int temp;
+      pthread_mutex_lock(&arr_mutex);
       temp = arr[0];
       arr[0] = arr[arr_size-1];
       arr[arr_size-1]=temp;
-   }
-    printf("sum is : %d\n", sum);    
-  }while(1);
+      printf("swap\n");
+      print_array();
+      pthread_mutex_unlock(&arr_mutex);
+   }while(1);
 }
 
 
