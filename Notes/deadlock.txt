@@ -1,0 +1,10 @@
+=> Deadlock is a condition, wherevr nobody makes a progress and gets blocked forever.
+=> Threads may get blocked if they are wrongly synchronized.
+=> Each is waiting for the other to realse the resource.
+=> They can never progress.
+
+ Four necessary conditions for mutual exclusion :- 
+  1. Mutual exclusion :- one or more then one resource are non sharable.
+  2. Hold and wait :- A thread is holding at least one resource and waiting for the other resources.
+  3. No Premption :- A thread can not be taken from unless the thread releases the resource.
+  4. Circular wait :- A list of threads are waiting for each other in circular form.
