@@ -4,6 +4,22 @@
 => Thread cancellation request queued by OS.
 => Having received the CR, the OS is now looking for an opportunity to terminate thread.
 => OS may or may not terminate the thread instantly(Asynchronous), not in programer's hand
-=> 
+
+
+=>Thread cancellation creating deadlocks :-
+  1.what if thread has locked the mutex and than it ic cancelled.
+    ->Mutex would stay locked ny the non existing thread.
+    -> In such situation, any other live thread would enter into deadlock situation if try to lock the same mutex.
+    -> we need to make sure that when thread get cancelled, it shouldn't have any mutex held in the locked state.
+    
+    
+=>Handling resource leaking on thread cancellation :- 
+   =>POSIX provides the use of Thread clean up handlers.
+   => invoked just before the thread is to be cancelled.
+        void(*thread_handler)(void*);
+   => When cleanup handlers returns, thread is cancelled immediately.
+   =>Thread cleanup handlers are specified in form of stack(stack of functions).
+   =>Cleanup handlers are invoked from top of the stack to the bottom of the stack.
+   => 
  
    
