@@ -1,0 +1,114 @@
+=> condition variables allows us to have fine control over taking the decision on which competing thread to block/resume.
+=> EX :- 
+  Thread T1 finds queue empty, it want to wait untill it find some elements into it.
+  CV variables gets itslef blocked or wake up when certain condition in met.
+=>Mutex can not block condition specific blocking, for this CV is required.
+
+
+
+Difference between Mutex and condition variables :- 
+ -> mutex grant an access to the resources if its not locked already.
+ -> CV allow the thread to inspect the resource state and decides if it wants to wait for the favourable resource state.
+
+MUTEX :- 
+
+ 1. Access the laptop if iot not been used by someone else.
+ 2. only mutual exclusion
+ 3. EX:-
+   pthread_mutex_lock(&laptop->mutex)
+   {
+     // DO whatever you want 
+   }
+   pthread_mutex_unlock(&laptop->mutex)
+   
+   
+  CV :- 
+
+ 1. Access the laptop if it is not used by someone else and it has internet connection too.
+ 2. mutual exclusion + custom tradition
+ 3. EX:-
+   pthread_mutex_lock(&laptop->mutex)
+   {
+     if(!laptop->internetConnection)
+      wait(cv,&laptop->mutex)
+     // DO whatever you want 
+   }
+   pthread_mutex_unlock(&laptop->mutex)
+4. condition variables are not used for mutual exclusion, they are used for signalling.
+5. Using cv, a thread can block itslef(pthread_cond_signal)
+6.using cv. a thread can block an already blocked thread(pthread_cond_signal).
+
+
+
+WAIT and SIGNAL condition variables :- 
+
+  1. Blocking a thread T1 by CV :- 
+  A thread blocks itself in 2 steps :-
+   i) lock a nutex
+   ii)invoke a pthread_cont_wait
+   
+  T1
+  
+   pthread_mutex_t mutex;
+   pthread_cond_t cv;
+   
+   pthread_mutex_init(&mutex, NULL);
+   pthread_cond_init(&cv, NULL);
+   
+   printf("T1 is blocked");
+   pthread_mutex_lock(&mutex);
+   pthread_cont_wait(&cv,&mutex);
+   printf("T1 is awakened");
+   pthread_mutex_unlock(&mutex);
+   
+   when thread invokes pthread_cond_wait(), 2 things happen :
+   1. thread gets blocked(job of cv).
+   2. mutex ownership is snatched from calling thread and is declared available.
+   
+   
+   T2
+   when blocked thread T1 receives signal :
+   
+   1. calling a blocked thread is called signalling.
+    signalling a blocked thread using condition variables involves 3 steps :- 
+      1.  lock mutec
+      2.  invoke pthread_cond_signal
+      3.  unlock mutex
+      
+     pthread_mutex_lock(&mutex);
+     pthread_cond_signal(&cv);
+     pthread_mutex_unlock(&mutex);
+ 
+    
+ -> when blocked thread receives signal :-
+   1. it slips into reeady to execute state and wait for mutex release.
+   2. it is given a lock on mutex as soon as mutex is relase by signalling thread
+   3. thread resumes execution
+      
+   
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
