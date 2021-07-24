@@ -47,9 +47,19 @@ declaration  : sem_t sem;
   any thread can go
    
    
+   => semaphore permit counter
+       int permit counter.
+
+   => Types of the Semaphores :- 
+      1.unnamed semaphores  -  threads, related processes
+      2.named semaphores      
+              -> used for unrelated processes.
+              -> but can be used for threads or related processes.
               
-              
-              
+       1. Strong Semaphores
+          -> we can conver week semaphore into strong semaphore we can deploy a manner such that blocked threads are unblocked in FIFO manner
+       2. Weak Semaphores
+           -> whenever theoraitically you can see in ypour solution that some thread blocked semaphore or mutex may never get a chance resume execution.
               
               
               
