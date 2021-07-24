@@ -63,9 +63,17 @@ Analogy :-
 3. if a thread tries to double lock a thread it leads to self-deadlocked.
 4. Mutexes are unlocked in LIFO order
 
- 
- 
-
+   
+    MUTEX POSIX APIS
+    
+    
+=> Declaration : pthread_mutex_t my_mutex;
+=> Initialization : pthread_mutex_init(&my_mutex, NULL);
+=> Destruction : pthread_mutex_destroy(&my_mutex);
+=> locking : pthread_mutex_lock(&my_mutex);
+=> unlocking : pthread_mutex_unblock(&my_mutex);
+   mutexes can never be memcopied = undefined behaviour
+ =
  
  
  
